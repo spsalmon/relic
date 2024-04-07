@@ -82,7 +82,7 @@ def train_relic(args):
         for step, (views, _) in enumerate(progress_bar):
             views = [v.to(device) for v in views]
             global_views = views[:n_global]
-            local_views = views[:n_local]
+            local_views = views[n_global:n_global + n_local]
 
             with autocast(enabled=args.fp16_precision):
                 projections_online = []
