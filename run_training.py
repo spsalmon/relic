@@ -10,6 +10,9 @@ parser.add_argument('--dataset_name',
                     default='stl10',
                     help='Dataset name',
                     choices=['stl10', 'cifar10', "tiny_imagenet", "food101", "imagenet1k"])
+parser.add_argument('--path-to-images',
+                    default='/home/sacha/mtg_card_detection/db_images',
+                    help='Path to dir containing your images',)
 parser.add_argument(
     '-m',
     '--encoder_model_name',

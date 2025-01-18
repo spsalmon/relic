@@ -39,12 +39,11 @@ def _round_up_to_odd(num):
 def get_global_transforms(image_size):
     color_jitter = transforms.ColorJitter(0.8, 0.8, 0.8, 0.2)
     return transforms.Compose([
-        transforms.Lambda(_grayscale_to_rgb),
+        # transforms.ToTensor(),
+        transforms.RandomPerspective(),
         transforms.RandomResizedCrop(image_size, scale=(0.1, 1.0)),
-        transforms.RandomHorizontalFlip(),
+        # transforms.RandomHorizontalFlip(),
         transforms.RandomApply([color_jitter], p=0.8),
-        transforms.RandomGrayscale(p=0.2),
-        transforms.Lambda(_grayscale_to_rgb),
         transforms.GaussianBlur(_round_up_to_odd(int(image_size * 0.1))),
         transforms.RandomSolarize(127, 0.2),
         transforms.ToTensor()
@@ -54,12 +53,11 @@ def get_global_transforms(image_size):
 def get_local_transforms(image_size):
     color_jitter = transforms.ColorJitter(0.8, 0.8, 0.8, 0.2)
     return transforms.Compose([
-        transforms.Lambda(_grayscale_to_rgb),
+        # transforms.ToTensor(),
+        transforms.RandomPerspective(),
         transforms.RandomResizedCrop(int(image_size*3/7), scale=(0.05, 1.0)),
-        transforms.RandomHorizontalFlip(),
+        # transforms.RandomHorizontalFlip(),
         transforms.RandomApply([color_jitter], p=0.8),
-        transforms.RandomGrayscale(p=0.2),
-        transforms.Lambda(_grayscale_to_rgb),
         transforms.GaussianBlur(_round_up_to_odd(int(image_size * 0.1))),
         transforms.ToTensor()
     ])
